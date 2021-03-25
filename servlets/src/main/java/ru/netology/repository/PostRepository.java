@@ -19,7 +19,7 @@ public final class PostRepository {
         return Optional.of(e);
       }
     }
-    return null;
+    return Optional.empty();
   }
 
   public final Post save(Post post) {
@@ -31,6 +31,7 @@ public final class PostRepository {
       for(int i = 0; i < list.size(); i++){
         if(list.get(i).getId() == post.getId()){
           list.set(i, post);
+          break;
         }else{
           list.add(post);
         }
@@ -41,7 +42,10 @@ public final class PostRepository {
 
   public final void removeById(long id) {
     for (int i = 0; i < list.size(); i++) {
-      if(list.get(i).getId() == id) list.remove(i);
+      if(list.get(i).getId() == id){
+        list.remove(i);
+        break;
+      }
     }
   }
 }
